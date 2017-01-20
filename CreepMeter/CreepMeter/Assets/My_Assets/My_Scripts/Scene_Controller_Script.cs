@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Scene_Controller_Script : MonoBehaviour
 {
+    public static Scene_Controller_Script instance;
+
     public Text[] txtBoxes;
 
     public GameObject mainIntoScene;
@@ -14,12 +16,7 @@ public class Scene_Controller_Script : MonoBehaviour
     public GameObject questionScene;
     public GameObject donsMessageScene;
     public GameObject gaugeScene;
-
-    //public GameObject standardAnswerPanelGo;    
-
-    public GameObject creepsNamePanelGo;
     public GameObject standardQuestionsPanelGo;
-
     public GameObject answer3Go;
     public GameObject answer4Go;
 
@@ -34,6 +31,8 @@ public class Scene_Controller_Script : MonoBehaviour
     public Text answer3Text;
     public Text answer4Text;
     public Text donsMessageText;
+    public Text herProfileCompletionPercent;
+    public Text hisProfileCompletionPercent;
 
     public RectTransform gaugeNeedleRectTrans;
 
@@ -41,6 +40,12 @@ public class Scene_Controller_Script : MonoBehaviour
     private bool creepProfileComplete;
     private bool questionnaireComplete;
 
+    void Awake()
+    {
+        instance = this;
+    }
+
+    /*
     void Start()
     {
         ResetPlayerPrefs();
@@ -82,7 +87,7 @@ public class Scene_Controller_Script : MonoBehaviour
         PlayerPrefs.GetString("SecurityQuestion");
         PlayerPrefs.GetString("SecurityAnswer");
 
-        PlayerPrefs.SetString("userProfileAnswer1", "null");
+        PlayerPrefs.SetString("userProfileAnswer1", null);
         PlayerPrefs.SetString("userProfileAnswer2", "null");
         PlayerPrefs.SetString("userProfileAnswer3", "null");
         PlayerPrefs.SetString("userProfileAnswer4", "null");
@@ -110,27 +115,9 @@ public class Scene_Controller_Script : MonoBehaviour
         PlayerPrefs.SetInt("userVulnerabilityScore", 0);
         PlayerPrefs.SetInt("creepProfileScore", 0);
 
-        PlayerPrefs.SetString("creepsName", "null");
         PlayerPrefs.GetInt("creepsSex");
 
         PlayerPrefs.DeleteAll();
-    }
-
-    private string CreepName()
-    {
-        return (PlayerPrefs.GetString("creepsName"));
-    }
-
-    private string hisher()
-    {
-        if (PlayerPrefs.GetInt("creepsSex") == 1)
-        {
-            return ("his");
-        }
-        else
-        {
-            return ("her");
-        }
     }
 
     void SwitchToGaugeScene()
@@ -139,8 +126,8 @@ public class Scene_Controller_Script : MonoBehaviour
         gaugeScene.SetActive(true);
         questionScene.SetActive(false);
     }
-
-    void SetNumberOfAnswerTo2()
+    */
+    public void SetNumberOfAnswerTo2()
     {
         answer3Go.SetActive(false);
         answer4Go.SetActive(false);
@@ -152,7 +139,7 @@ public class Scene_Controller_Script : MonoBehaviour
         answer2BtnRecTrans.anchorMax = new Vector2(1, 0.475f);
     }
 
-    void SetNumberOfAnswerTo3()
+    public void SetNumberOfAnswerTo3()
     {
         answer3Go.SetActive(true);
         answer4Go.SetActive(false);
@@ -167,7 +154,7 @@ public class Scene_Controller_Script : MonoBehaviour
         answer3BtnRecTrans.anchorMax = new Vector2(1, 0.3f);
     }
 
-    void SetNumberOfAnswerTo4()
+    public void SetNumberOfAnswerTo4()
     {
         answer3Go.SetActive(true);
         answer4Go.SetActive(true);
@@ -185,18 +172,14 @@ public class Scene_Controller_Script : MonoBehaviour
         answer4BtnRecTrans.anchorMax = new Vector2(1, 0.25f);
     }
 
-    void SwitchToCreepsNameInput()
-    {
-        creepsNamePanelGo.SetActive(true);
-        standardQuestionsPanelGo.SetActive(false);
-    }
-
+    /*
     public void SetQuestions()
     {
         #region userProfile
         if (PlayerPrefs.GetInt("userProfileComplete") != 1)
         {
             Debug.Log("User profile question: " + PlayerPrefs.GetInt("userProfileQuestion"));
+
             switch (PlayerPrefs.GetInt("userProfileQuestion"))
             {
                 case 1:
@@ -234,7 +217,7 @@ public class Scene_Controller_Script : MonoBehaviour
                     answer3Text.text = "Two";
                     answer4Text.text = "Three or more";
                     break;
-                case 5:                             
+                case 5:
                     PlayerPrefs.SetInt("userProfileComplete", 1);
                     Debug.Log("User profile complete: " + PlayerPrefs.GetInt("userProfileComplete"));
                     donsMessageScene.SetActive(true);
@@ -245,8 +228,9 @@ public class Scene_Controller_Script : MonoBehaviour
                                             + PlayerPrefs.GetString("userProfileAnswer4");
                     break;
                 case 6:
+                    herProfileCompletionPercent.text = ("100%");
                     menuScene.SetActive(true);
-                    questionScene.SetActive(false);                    
+                    questionScene.SetActive(false);
                     break;
             }
         }
@@ -256,94 +240,87 @@ public class Scene_Controller_Script : MonoBehaviour
         if (PlayerPrefs.GetInt("userProfileComplete") == 1 && PlayerPrefs.GetInt("creepProfileComplete") != 1)
         {
             Debug.Log("Creep profile question: " + PlayerPrefs.GetInt("creepProfileQuestion"));
-            if (!PlayerPrefs.HasKey("creepsName"))
+            switch (PlayerPrefs.GetInt("creepProfileQuestion"))
             {
-                SwitchToCreepsNameInput();
-            }
-            else
-            {
-                switch (PlayerPrefs.GetInt("creepProfileQuestion"))
-                {
-                    case 0:
-                        questionText.text = CreepName() + "'s" + " age is";
+                case 0:
+                    questionText.text = "His age is";
 
-                        SetNumberOfAnswerTo3();
+                    SetNumberOfAnswerTo3();
 
-                        answer1Text.text = "Within 5 years of my age";
-                        answer2Text.text = "15 years or more older";
-                        answer3Text.text = "10 years or more younger";
+                    answer1Text.text = "within 5 years of my age";
+                    answer2Text.text = "15 years or more older";
+                    answer3Text.text = "10 years or more younger";
 
-                        IncreaseCreepsTotalScore(60);
-                        break;
-                    case 1:
-                        questionText.text = CreepName() + "...";
+                    IncreaseCreepsTotalScore(60);
+                    break;
+                case 1:
+                    questionText.text = "He...";
 
-                        SetNumberOfAnswerTo4();
+                    SetNumberOfAnswerTo4();
 
-                        answer1Text.text = "has " + hisher() + " own place";
-                        answer2Text.text = "lives with me";
-                        answer3Text.text = "in Jail/Prison";
-                        answer4Text.text = "shelter/Homeless";
+                    answer1Text.text = "has his own place";
+                    answer2Text.text = "lives with me";
+                    answer3Text.text = "in Jail/Prison";
+                    answer4Text.text = "shelter/Homeless";
 
-                        IncreaseCreepsTotalScore(50);
-                        break;
-                    case 2:
-                        questionText.text = CreepName() + " and you are...";
+                    IncreaseCreepsTotalScore(50);
+                    break;
+                case 2:
+                    questionText.text = "He and you are...";
 
-                        answer1Text.text = "dating - live apart";
-                        answer2Text.text = "live together / married";
-                        answer3Text.text = "breaking up";
-                        answer4Text.text = "seperated a long time ago";
+                    answer1Text.text = "dating - live apart";
+                    answer2Text.text = "live together / married";
+                    answer3Text.text = "breaking up";
+                    answer4Text.text = "seperated a long time ago";
 
-                        IncreaseCreepsTotalScore(60);
-                        break;
-                    case 3:
-                        //Only ask if married
-                        questionText.text = "Are you married";
+                    IncreaseCreepsTotalScore(60);
+                    break;
+                case 3:
+                    //Only ask if married
+                    questionText.text = "Are you married";
 
-                        answer1Text.text = "Yes";
-                        answer2Text.text = "No";
-                        answer3Text.text = "Engaged to be married";
-                        answer4Text.text = "I hope to be married some day";
+                    answer1Text.text = "Yes";
+                    answer2Text.text = "No";
+                    answer3Text.text = "Engaged to be married";
+                    answer4Text.text = "I hope to be married some day";
 
-                        IncreaseCreepsTotalScore(40);
-                        break;
-                    case 4:
-                        questionText.text = "I met " + CreepName() + "...";
+                    IncreaseCreepsTotalScore(40);
+                    break;
+                case 4:
+                    questionText.text = "I met him...";
 
-                        answer1Text.text = "through friends";
-                        answer2Text.text = "common interest, work / school";
-                        answer3Text.text = "online / bar / party";
-                        answer4Text.text = "arranged by family";
+                    answer1Text.text = "through friends";
+                    answer2Text.text = "common interest, work / school";
+                    answer3Text.text = "online / bar / party";
+                    answer4Text.text = "arranged by family";
 
-                        IncreaseCreepsTotalScore(60);
-                        break;
-                    case 5:
-                        questionText.text = CreepName() + " is...";
+                    IncreaseCreepsTotalScore(60);
+                    break;
+                case 5:
+                    questionText.text = "He is...";
 
-                        answer1Text.text = "stably employed";
-                        answer2Text.text = "recently unemployed";
-                        answer3Text.text = "works for cash / short term";
-                        answer4Text.text = "unemployed, welfare, illegal";
+                    answer1Text.text = "stably employed";
+                    answer2Text.text = "recently unemployed";
+                    answer3Text.text = "works for cash / short term";
+                    answer4Text.text = "unemployed, welfare, illegal";
 
-                        IncreaseCreepsTotalScore(50);
-                        break;
-                    case 6:
-                        questionText.text = CreepName() + " has access to...";
+                    IncreaseCreepsTotalScore(50);
+                    break;
+                case 6:
+                    questionText.text = "He has access to...";
 
-                        answer1Text.text = "guns that " + CreepName() + " owns";
-                        answer2Text.text = "has access to guns";
-                        answer3Text.text = "no access to guns";
-                        answer4Text.text = "don't know, maybe";
+                    answer1Text.text = "guns that he owns";
+                    answer2Text.text = "has access to guns";
+                    answer3Text.text = "no access to guns";
+                    answer4Text.text = "don't know, maybe";
 
-                        IncreaseCreepsTotalScore(120);
-                        break;
-                    case 7:
-                        PlayerPrefs.SetInt("creepProfileComplete", 1);
-                        SwitchToGaugeScene();
-                        Debug.Log("Creep profile complete: " + PlayerPrefs.GetInt("creepProfileComplete"));
-                        break;
-                }
+                    IncreaseCreepsTotalScore(120);
+                    break;
+                case 7:
+                    PlayerPrefs.SetInt("creepProfileComplete", 1);
+                    SwitchToGaugeScene();
+                    Debug.Log("Creep profile complete: " + PlayerPrefs.GetInt("creepProfileComplete"));
+                    break;
             }
         }
         #endregion
@@ -566,7 +543,7 @@ public class Scene_Controller_Script : MonoBehaviour
                     // If user is on social assistance
                     // Increase vulnerability by 40
                     SetUserVulnerabilityScore(40);
-                    PlayerPrefs.SetString("userProfileAnswer3", "Having " + CreepName() + " dependent on you increases risk. ");
+                    PlayerPrefs.SetString("userProfileAnswer3", "Having him dependent on you increases risk. ");
                     break;
                 case 4:
                     // If user has 2 children
@@ -698,7 +675,7 @@ public class Scene_Controller_Script : MonoBehaviour
     private void UserProfileNextQuestion()
     {
         Debug.Log("User Vulnerability Score: " + PlayerPrefs.GetInt("userVulnerabilityScore"));
-        if (PlayerPrefs.GetInt("userProfileComplete")  != 1)
+        if (PlayerPrefs.GetInt("userProfileComplete") != 1)
         {
             PlayerPrefs.SetInt("userProfileQuestion", PlayerPrefs.GetInt("userProfileQuestion") + 1);
         }
@@ -763,4 +740,6 @@ public class Scene_Controller_Script : MonoBehaviour
     {
         PlayerPrefs.SetInt("creepProfileScore", PlayerPrefs.GetInt("creepProfileScore") + creepVul);
     }
+
+    */
 }

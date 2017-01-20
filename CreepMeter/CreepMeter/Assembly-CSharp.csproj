@@ -46,16 +46,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\My_Assets\My_Scripts\Button_Scripts\Creep_Name_Button_Script.cs" />
+     <Compile Include="Assets\My_Assets\My_Scripts\Answer_Button_Script.cs" />
      <Compile Include="Assets\My_Assets\My_Scripts\Button_Scripts\Her_Profile_Button_Script.cs" />
      <Compile Include="Assets\My_Assets\My_Scripts\Button_Scripts\Password_Button_Script.cs" />
      <Compile Include="Assets\My_Assets\My_Scripts\Button_Scripts\Questionnaire_Button_Script.cs" />
      <Compile Include="Assets\My_Assets\My_Scripts\Button_Scripts\Switch_Scenes_Button_Script.cs" />
-     <Compile Include="Assets\My_Assets\My_Scripts\Creep_Name_Panel_Controller_Script.cs" />
+     <Compile Include="Assets\My_Assets\My_Scripts\New_Scene_Controller_Script.cs" />
+     <Compile Include="Assets\My_Assets\My_Scripts\Question_Button_Script.cs" />
      <Compile Include="Assets\My_Assets\My_Scripts\Scene_Controller_Script.cs" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>E:/Unity Install Files/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Unity Install Files/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -70,9 +68,6 @@
  </Reference>
  <Reference Include="UnityEngine.HoloLens">
  <HintPath>E:/Unity Install Files/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Purchasing">
- <HintPath>E:/Unity Install Files/Editor/Data/UnityExtensions/Unity/UnityPurchasing/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.VR">
  <HintPath>E:/Unity Install Files/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>

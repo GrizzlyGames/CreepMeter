@@ -11,6 +11,7 @@ public class Questionnaire_Button_Script : MonoBehaviour {
     public bool answer3;
     public bool answer4;
 
+    /*
     public void AnswerSelected()
     {
         if (answer1)
@@ -30,4 +31,5 @@ public class Questionnaire_Button_Script : MonoBehaviour {
             sceneScript.Answer4Selected();
         }
     }
+    */
 }
