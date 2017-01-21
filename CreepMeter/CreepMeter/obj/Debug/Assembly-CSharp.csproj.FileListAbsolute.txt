@@ -59,3 +59,4 @@ C:\Users\Grizzly\Documents\GitHub\CreepMeter\CreepMeter\CreepMeter\Temp\bin\Debu
 C:\Users\Grizzly\Documents\GitHub\CreepMeter\CreepMeter\CreepMeter\Temp\bin\Debug\UnityEngine.VR.xml
 C:\Users\Grizzly\Documents\GitHub\CreepMeter\CreepMeter\CreepMeter\obj\Debug\Assembly-CSharp.dll
 C:\Users\Grizzly\Documents\GitHub\CreepMeter\CreepMeter\CreepMeter\obj\Debug\Assembly-CSharp.pdb
+C:\Users\Grizzly\Documents\GitHub\CreepMeter\CreepMeter\CreepMeter\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
